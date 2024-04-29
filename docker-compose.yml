@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  minha-api:
+    image: api-number-to-text
+    build:
+      context: .
+    ports:
+      - "5000:5000"
