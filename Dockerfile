@@ -1,11 +1,14 @@
-FROM python:3.8-slim
+FROM alpine:latest
 
-WORKDIR /app
+RUN apk add py3-pip
+RUN pip3 install flask
 
-COPY . .
+WORKDIR /home
 
-RUN pip install --no-cache-dir -r requirements.txt
+COPY api.py .
 
-EXPOSE 5000
+EXPOSE 80
 
-CMD ["python", "api.py"]
+ENTRYPOINT ["/usr/bin/flask","run"]
+
+CMD ["--host=0.0.0.0", "--port=80"]
