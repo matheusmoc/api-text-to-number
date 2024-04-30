@@ -1,12 +1,11 @@
-FROM python:3.8-alpine3.12
+FROM python:3.8-slim
 
 WORKDIR /app
 
+COPY . .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
 EXPOSE 5000
-ENV FLASK_APP=app.py
 
-COPY . /app
-RUN pip install -r requirements.txt
-
-ENTRYPOINT [ "flask"]
-CMD ["flask", "run", "-h", "0.0.0.0", "-p", "5000"]
+CMD ["python", "api.py"]
